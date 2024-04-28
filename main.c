@@ -182,6 +182,12 @@ void simpletest(char *ifname)
          /* wait for all slaves to reach SAFE_OP state */
          ec_statecheck(0, EC_STATE_SAFE_OP,  EC_TIMEOUTSTATE * 4);
 
+         uint16_t buff;
+         uint16 buff_size;
+
+         ec_SDOread(1, 0x6041, 0x00, FALSE, &buff_size, &buff, EC_TIMEOUTRET);
+         printf("Slave 1, 0x6041, 0x00: %d\n", buff);
+
          oloop = ec_slave[0].Obytes;
          if ((oloop == 0) && (ec_slave[0].Obits > 0)) oloop = 1;
          if (oloop > 8) oloop = 8;
