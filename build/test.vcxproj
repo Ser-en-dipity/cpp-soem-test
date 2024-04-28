@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{06226F8F-B2EB-31D2-A232-620560E5A44D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>test</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\ethernet-cmake-exe\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">test.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">test</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\ethernet-cmake-exe\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">test.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">test</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\ethernet-cmake-exe\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">test.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">test</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\ethernet-cmake-exe\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">test.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">test</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>wpcap.lib;Packet.lib;Ws2_32.lib;Winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/ethernet-cmake-exe/oshw/win32/wpcap/Lib/x64;D:/ethernet-cmake-exe/oshw/win32/wpcap/Lib/x64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/ethernet-cmake-exe/build/Debug/test.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/ethernet-cmake-exe/build/Debug/test.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>wpcap.lib;Packet.lib;Ws2_32.lib;Winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/ethernet-cmake-exe/oshw/win32/wpcap/Lib/x64;D:/ethernet-cmake-exe/oshw/win32/wpcap/Lib/x64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/ethernet-cmake-exe/build/Release/test.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/ethernet-cmake-exe/build/Release/test.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>wpcap.lib;Packet.lib;Ws2_32.lib;Winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/ethernet-cmake-exe/oshw/win32/wpcap/Lib/x64;D:/ethernet-cmake-exe/oshw/win32/wpcap/Lib/x64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/ethernet-cmake-exe/build/MinSizeRel/test.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/ethernet-cmake-exe/build/MinSizeRel/test.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\ethernet-cmake-exe\osal;D:\ethernet-cmake-exe\oshw;D:\ethernet-cmake-exe\soem;D:\ethernet-cmake-exe\osal\win32;D:\ethernet-cmake-exe\oshw\win32;D:\ethernet-cmake-exe\oshw\win32\wpcap\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>wpcap.lib;Packet.lib;Ws2_32.lib;Winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/ethernet-cmake-exe/oshw/win32/wpcap/Lib/x64;D:/ethernet-cmake-exe/oshw/win32/wpcap/Lib/x64/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/ethernet-cmake-exe/build/RelWithDebInfo/test.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/ethernet-cmake-exe/build/RelWithDebInfo/test.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\ethernet-cmake-exe\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/ethernet-cmake-exe/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+D:\CMake\bin\cmake.exe -SD:/ethernet-cmake-exe -BD:/ethernet-cmake-exe/build --check-stamp-file D:/ethernet-cmake-exe/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\CMake\share\cmake-3.28\Modules\CMakeCCompiler.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeCCompilerABI.c;D:\CMake\share\cmake-3.28\Modules\CMakeCInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC-C.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\CMake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC-C.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeCCompiler.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeRCCompiler.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\ethernet-cmake-exe\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/ethernet-cmake-exe/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+D:\CMake\bin\cmake.exe -SD:/ethernet-cmake-exe -BD:/ethernet-cmake-exe/build --check-stamp-file D:/ethernet-cmake-exe/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\CMake\share\cmake-3.28\Modules\CMakeCCompiler.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeCCompilerABI.c;D:\CMake\share\cmake-3.28\Modules\CMakeCInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC-C.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\CMake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC-C.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeCCompiler.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeRCCompiler.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\ethernet-cmake-exe\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/ethernet-cmake-exe/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+D:\CMake\bin\cmake.exe -SD:/ethernet-cmake-exe -BD:/ethernet-cmake-exe/build --check-stamp-file D:/ethernet-cmake-exe/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\CMake\share\cmake-3.28\Modules\CMakeCCompiler.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeCCompilerABI.c;D:\CMake\share\cmake-3.28\Modules\CMakeCInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC-C.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\CMake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC-C.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeCCompiler.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeRCCompiler.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\ethernet-cmake-exe\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/ethernet-cmake-exe/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+D:\CMake\bin\cmake.exe -SD:/ethernet-cmake-exe -BD:/ethernet-cmake-exe/build --check-stamp-file D:/ethernet-cmake-exe/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\CMake\share\cmake-3.28\Modules\CMakeCCompiler.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeCCompilerABI.c;D:\CMake\share\cmake-3.28\Modules\CMakeCInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeCommonLanguageInclude.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeCompilerIdDetection.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompileFeatures.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerABI.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineCompilerId.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineRCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeDetermineSystem.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeFindBinUtils.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeGenericSystem.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeInitializeConfigs.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeLanguageInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseImplicitIncludeInfo.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseImplicitLinkInfo.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeParseLibraryArchitecture.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeRCCompiler.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeRCInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeSystem.cmake.in;D:\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInformation.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeSystemSpecificInitialize.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestCompilerCommon.cmake;D:\CMake\share\cmake-3.28\Modules\CMakeTestRCCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ADSP-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ARMCC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\ARMClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\AppleClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Borland-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Bruce-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Compaq-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Cray-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\CrayClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\GHS-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\GNU-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\HP-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IAR-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IBMCPP-C-DetermineVersionInternal.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IBMClang-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Intel-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\LCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC-C.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\MSVC.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\NVHPC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\OrangeC-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\PGI-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\PathScale-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SCO-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SDCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\SunPro-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\TI-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Tasking-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\TinyCC-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\VisualAge-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\Watcom-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\XL-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\XLClang-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\Compiler\zOS-C-DetermineCompiler.cmake;D:\CMake\share\cmake-3.28\Modules\CompilerId\VS-10.vcxproj.in;D:\CMake\share\cmake-3.28\Modules\Internal\FeatureTesting.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-Initialize.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC-C.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows-MSVC.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\Windows.cmake;D:\CMake\share\cmake-3.28\Modules\Platform\WindowsPaths.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeCCompiler.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeRCCompiler.cmake;D:\ethernet-cmake-exe\build\CMakeFiles\3.28.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\ethernet-cmake-exe\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\ethernet-cmake-exe\soem\ethercatbase.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\soem\ethercatcoe.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\soem\ethercatconfig.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\soem\ethercatdc.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\soem\ethercateoe.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\soem\ethercatfoe.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\soem\ethercatmain.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\soem\ethercatprint.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\soem\ethercatsoe.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\osal\win32\osal.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\oshw\win32\nicdrv.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\oshw\win32\oshw.c" />
+    <ClCompile Include="D:\ethernet-cmake-exe\main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\ethernet-cmake-exe\build\ZERO_CHECK.vcxproj">
+      <Project>{C50843F7-7814-3023-99AB-09D014DFD9F8}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,13 @@
+D:\ethernet-cmake-exe\soem\ethercatbase.c;D:\ethernet-cmake-exe\build\test.dir\Debug\ethercatbase.obj
+D:\ethernet-cmake-exe\soem\ethercatcoe.c;D:\ethernet-cmake-exe\build\test.dir\Debug\ethercatcoe.obj
+D:\ethernet-cmake-exe\soem\ethercatconfig.c;D:\ethernet-cmake-exe\build\test.dir\Debug\ethercatconfig.obj
+D:\ethernet-cmake-exe\soem\ethercatdc.c;D:\ethernet-cmake-exe\build\test.dir\Debug\ethercatdc.obj
+D:\ethernet-cmake-exe\soem\ethercateoe.c;D:\ethernet-cmake-exe\build\test.dir\Debug\ethercateoe.obj
+D:\ethernet-cmake-exe\soem\ethercatfoe.c;D:\ethernet-cmake-exe\build\test.dir\Debug\ethercatfoe.obj
+D:\ethernet-cmake-exe\soem\ethercatmain.c;D:\ethernet-cmake-exe\build\test.dir\Debug\ethercatmain.obj
+D:\ethernet-cmake-exe\soem\ethercatprint.c;D:\ethernet-cmake-exe\build\test.dir\Debug\ethercatprint.obj
+D:\ethernet-cmake-exe\soem\ethercatsoe.c;D:\ethernet-cmake-exe\build\test.dir\Debug\ethercatsoe.obj
+D:\ethernet-cmake-exe\osal\win32\osal.c;D:\ethernet-cmake-exe\build\test.dir\Debug\osal.obj
+D:\ethernet-cmake-exe\oshw\win32\nicdrv.c;D:\ethernet-cmake-exe\build\test.dir\Debug\nicdrv.obj
+D:\ethernet-cmake-exe\oshw\win32\oshw.c;D:\ethernet-cmake-exe\build\test.dir\Debug\oshw.obj
+D:\ethernet-cmake-exe\main.c;D:\ethernet-cmake-exe\build\test.dir\Debug\main.obj
