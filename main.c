@@ -76,32 +76,47 @@ int EL7031setup(uint16 slave)
 
 int DELTAsetup(uint16 slave)
 {
-    int retval;
-    uint8 u8val;
-    uint16 u16val;
-    uint32 u32val;
+   int retval;
+   uint8 u8val;
+   uint16 u16val;
+   uint32 u32val;
 
-    retval = 0;
+   retval = 0;
+   
+   uint16 map_1c12[4] = {0x0003, 0x1600, 0x1601, 0x1602};
+   uint16 map_1c13[3] = {0x0002, 0x1a00, 0x1a01};
 
-    u8val = 0x03;
-    retval += ec_SDOwrite(slave, 0x6060, 0x00, FALSE, sizeof(u8val), &u8val, EC_TIMEOUTRXM);
-    u16val = 0x00c8;
-    retval += ec_SDOwrite(slave, 0x6083, 0x00, FALSE, sizeof(u16val), &u16val, EC_TIMEOUTRXM);
-    u16val = 0x00c8;
-    retval += ec_SDOwrite(slave, 0x6084, 0x00, FALSE, sizeof(u16val), &u16val, EC_TIMEOUTRXM);
-   //  u16val = 0x00c8;
-   //  retval += ec_SDOwrite(slave, 0x6087, 0x00, FALSE, sizeof(u16val), &u16val, EC_TIMEOUTRXM);
-    u8val = 0x00;
-    retval += ec_SDOwrite(slave, 0x60FF, 0x00, FALSE, sizeof(u8val), &u8val, EC_TIMEOUTRXM);
-    u16val = 0x03e8;
-    retval += ec_SDOwrite(slave, 0x606E, 0x00, FALSE, sizeof(u16val), &u16val, EC_TIMEOUTRXM);
-    u16val = 0x07d0;
-    retval += ec_SDOwrite(slave, 0x60FF, 0x00, FALSE, sizeof(u16val), &u16val, EC_TIMEOUTRXM);
+   retval += ec_SDOwrite(slave, 0x1c12, 0x00, FALSE, sizeof(map_1c12), &map_1c12, EC_TIMEOUTSAFE);
+   retval += ec_SDOwrite(slave, 0x1c13, 0x00, FALSE, sizeof(map_1c13), &map_1c13, EC_TIMEOUTSAFE);
 
-    while(EcatError) printf("%s", ec_elist2string());
+   //TXPDO1
+   ob2 = 0x656C630;
+   ec_SDOwrite(slave,0X1600,00,FALSE,sizeof(ob2),&ob2,EC_TIMEOUTRXM);
+   ob2 = 0x60410016;
+   ec_SDOwrite(slave,0X1600,01,FALSE,sizeof(ob2),&ob2,EC_TIMEOUTRXM);
+   ob2 = 0x60640032;
+   ec_SDOwrite(slave,0X1600,02,FALSE,sizeof(ob2),&ob2,EC_TIMEOUTRXM);
+   ob2 = 0x60770016;
+   ec_SDOwrite(slave,0X1600,03,FALSE,sizeof(ob2),&ob2,EC_TIMEOUTRXM);
+   ob2 = 0x776F643;
+   ec_SDOwrite(slave,0X1600,00,FALSE,sizeof(ob2),&ob2,EC_TIMEOUTRXM);
+   ob2 = 0x656C630;
 
-    printf("delta slave %d set, retval = %d\n", slave, retval);
-    return 1;
+   //Rx_PDO1
+   ob2 = 0x656C630;
+   ec_SDOwrite(slave,Rx_PDO1,00,FALSE,sizeof(ob2),&ob2,EC_TIMEOUTRXM);
+   ob2 = 0x60400016;
+   ec_SDOwrite(slave,Rx_PDO1,01,FALSE,sizeof(ob2),&ob2,EC_TIMEOUTRXM);
+   ob2 = 0x607A0032;
+   ec_SDOwrite(slave,Rx_PDO1,02,FALSE,sizeof(ob2),&ob2,EC_TIMEOUTRXM);
+   ob2 = 0x776F642;
+   ec_SDOwrite(slave,Rx_PDO1,00,FALSE,sizeof(ob2),&ob2,EC_TIMEOUTRXM);
+   
+
+   while(EcatError) printf("%s", ec_elist2string());
+
+   printf("delta slave %d set, retval = %d\n", slave, retval);
+   return 1;
 }
 
 int ec_slave_read()
