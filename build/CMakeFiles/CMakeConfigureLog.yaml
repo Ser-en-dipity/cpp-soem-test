@@ -24,7 +24,7 @@ events:
       The output was:
       0
       MSBuild version 17.9.8+b34f75857 for .NET Framework
-      Build started 2024/4/28 14:49:22.
+      Build started 2024/5/4 20:11:57.
       
       Project "D:\\ethernet-cmake-exe\\build\\CMakeFiles\\3.28.3\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -53,7 +53,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.80
+      Time Elapsed 00:00:00.76
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -72,8 +72,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "D:/ethernet-cmake-exe/build/CMakeFiles/CMakeScratch/TryCompile-0d1q2l"
-      binary: "D:/ethernet-cmake-exe/build/CMakeFiles/CMakeScratch/TryCompile-0d1q2l"
+      source: "D:/ethernet-cmake-exe/build/CMakeFiles/CMakeScratch/TryCompile-xbnl6f"
+      binary: "D:/ethernet-cmake-exe/build/CMakeFiles/CMakeScratch/TryCompile-xbnl6f"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
       CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -82,40 +82,40 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/ethernet-cmake-exe/build/CMakeFiles/CMakeScratch/TryCompile-0d1q2l'
+        Change Dir: 'D:/ethernet-cmake-exe/build/CMakeFiles/CMakeScratch/TryCompile-xbnl6f'
         
-        Run Build Command(s): D:/VS-2022/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_5e818.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): D:/VS-2022/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_9b99c.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.9.8+b34f75857 for .NET Framework
-        Build started 2024/4/28 14:49:23.
+        Build started 2024/5/4 20:11:58.
         
-        Project "D:\\ethernet-cmake-exe\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0d1q2l\\cmTC_5e818.vcxproj" on node 1 (default targets).
+        Project "D:\\ethernet-cmake-exe\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xbnl6f\\cmTC_9b99c.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_5e818.dir\\Debug\\".
+          Creating directory "cmTC_9b99c.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "D:\\ethernet-cmake-exe\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0d1q2l\\Debug\\".
-          Creating directory "cmTC_5e818.dir\\Debug\\cmTC_5e818.tlog\\".
+          Creating directory "D:\\ethernet-cmake-exe\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xbnl6f\\Debug\\".
+          Creating directory "cmTC_9b99c.dir\\Debug\\cmTC_9b99c.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_5e818.dir\\Debug\\cmTC_5e818.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_5e818.dir\\Debug\\cmTC_5e818.tlog\\unsuccessfulbuild".
+          Creating "cmTC_9b99c.dir\\Debug\\cmTC_9b99c.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_9b99c.dir\\Debug\\cmTC_9b99c.tlog\\unsuccessfulbuild".
         ClCompile:
-          D:\\VS-2022\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5e818.dir\\Debug\\\\" /Fd"cmTC_5e818.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\CMake\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
+          D:\\VS-2022\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9b99c.dir\\Debug\\\\" /Fd"cmTC_9b99c.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\CMake\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.39.33523 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_5e818.dir\\Debug\\\\" /Fd"cmTC_5e818.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\CMake\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9b99c.dir\\Debug\\\\" /Fd"cmTC_9b99c.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\CMake\\share\\cmake-3.28\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          D:\\VS-2022\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\ethernet-cmake-exe\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0d1q2l\\Debug\\cmTC_5e818.exe" /INCREMENTAL /ILK:"cmTC_5e818.dir\\Debug\\cmTC_5e818.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/ethernet-cmake-exe/build/CMakeFiles/CMakeScratch/TryCompile-0d1q2l/Debug/cmTC_5e818.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/ethernet-cmake-exe/build/CMakeFiles/CMakeScratch/TryCompile-0d1q2l/Debug/cmTC_5e818.lib" /MACHINE:X64  /machine:x64 cmTC_5e818.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_5e818.vcxproj -> D:\\ethernet-cmake-exe\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0d1q2l\\Debug\\cmTC_5e818.exe
+          D:\\VS-2022\\VC\\Tools\\MSVC\\14.39.33519\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\ethernet-cmake-exe\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xbnl6f\\Debug\\cmTC_9b99c.exe" /INCREMENTAL /ILK:"cmTC_9b99c.dir\\Debug\\cmTC_9b99c.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/ethernet-cmake-exe/build/CMakeFiles/CMakeScratch/TryCompile-xbnl6f/Debug/cmTC_9b99c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/ethernet-cmake-exe/build/CMakeFiles/CMakeScratch/TryCompile-xbnl6f/Debug/cmTC_9b99c.lib" /MACHINE:X64  /machine:x64 cmTC_9b99c.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_9b99c.vcxproj -> D:\\ethernet-cmake-exe\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xbnl6f\\Debug\\cmTC_9b99c.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_5e818.dir\\Debug\\cmTC_5e818.tlog\\unsuccessfulbuild".
-          Touching "cmTC_5e818.dir\\Debug\\cmTC_5e818.tlog\\cmTC_5e818.lastbuildstate".
-        Done Building Project "D:\\ethernet-cmake-exe\\build\\CMakeFiles\\CMakeScratch\\TryCompile-0d1q2l\\cmTC_5e818.vcxproj" (default targets).
+          Deleting file "cmTC_9b99c.dir\\Debug\\cmTC_9b99c.tlog\\unsuccessfulbuild".
+          Touching "cmTC_9b99c.dir\\Debug\\cmTC_9b99c.tlog\\cmTC_9b99c.lastbuildstate".
+        Done Building Project "D:\\ethernet-cmake-exe\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xbnl6f\\cmTC_9b99c.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.84
+        Time Elapsed 00:00:00.80
         
       exitCode: 0
 ...
