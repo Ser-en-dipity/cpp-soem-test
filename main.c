@@ -559,11 +559,11 @@ int DELTAsetup(uint16 slave)
    u32val = 0x60410010;
    retval += ec_SDOwrite(slave,0x1a00,01,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
    u32val = 0x60610008;
-   retval += ec_SDOwrite(slave,0x1a00,01,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   retval += ec_SDOwrite(slave,0x1a00,02,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
    u32val = 0x606B0020;
-   retval += ec_SDOwrite(slave,0x1a00,01,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   retval += ec_SDOwrite(slave,0x1a00,03,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
    u32val = 0x606C0020;
-   retval += ec_SDOwrite(slave,0x1a00,01,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   retval += ec_SDOwrite(slave,0x1a00,04,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
    u8val = 0x04;
    retval += ec_SDOwrite(slave,0x1a00,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
 
