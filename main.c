@@ -584,7 +584,8 @@ int DELTAsetup(uint16 slave)
    retval += ec_SDOwrite(slave, 0x6083, 0x00, FALSE, sizeof(u32val), &u32val, EC_TIMEOUTRXM);
    retval += ec_SDOwrite(slave, 0x6084, 0x00, FALSE, sizeof(u32val), &u32val, EC_TIMEOUTRXM);
 
-   
+   ec_dcsync0(slave, TRUE, 5 * 1000, 0);
+
 
    while(EcatError) printf("%s", ec_elist2string());
 
@@ -642,26 +643,25 @@ void simpletest(char *ifname)
 
        if ( ec_config_init(FALSE) > 0 )
        {
-         printf("%d slaves found and configured.\n",ec_slavecount);
+            printf("%d slaves found and configured.\n",ec_slavecount);
+            ec_configdc();
 
-         
-             for(slc = 1; slc <= ec_slavecount; slc++)
-             {
-                 // beckhoff EL7031, using ec_slave[].name is not very reliable
-                 
-                     // link slave specific setup to preop->safeop hook
-                     printf("ec slave name :%s \n",ec_slave[slc].name);
-                     ec_slave[slc].PO2SOconfig = &DELTAsetup;
-                     // int res = DELTAsetup(slc);
-                     // printf("res: %d\n", res);
-             }
+            for(slc = 1; slc <= ec_slavecount; slc++)
+            {
+                // beckhoff EL7031, using ec_slave[].name is not very reliable
+                
+                    // link slave specific setup to preop->safeop hook
+                    printf("ec slave name :%s \n",ec_slave[slc].name);
+                    ec_slave[slc].PO2SOconfig = &DELTAsetup;
+                    // int res = DELTAsetup(slc);
+                    // printf("res: %d\n", res);
+            }
 
 
          usedmem = ec_config_map(&IOmap);
 
          printf("usedmem :%d sizeofIOmap %d\n\r",usedmem,sizeof(IOmap));
 
-         ec_configdc();
 
          
 
