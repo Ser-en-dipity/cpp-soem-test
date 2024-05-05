@@ -27,6 +27,17 @@ volatile int rtcnt;
 boolean inOP;
 uint8 currentgroup = 0;
 
+struct PDO_out {
+   uint16_t controlword;
+   int32_t target_vel;
+};
+struct PDO_in {
+   uint16_t statusword;
+   int8_t mode_of_op;
+   int32_t vel_demand;
+   int32_t vel_act;
+};
+
 /* most basic RT thread for process data, just does IO transfer */
 void CALLBACK RTthread(UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1,  DWORD_PTR dw2)
 {
@@ -36,41 +47,6 @@ void CALLBACK RTthread(UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1
     wkc = ec_receive_processdata(EC_TIMEOUTRET);
     rtcnt++;
     /* do RT control stuff here */
-}
-
-int EL7031setup(uint16 slave)
-{
-    int retval;
-    uint16 u16val;
-
-    // map velocity
-    uint16 map_1c12[4] = {0x0003, 0x1601, 0x1602, 0x1604};
-    uint16 map_1c13[3] = {0x0002, 0x1a01, 0x1a03};
-
-    retval = 0;
-
-    // Set PDO mapping using Complete Access
-    // Strange, writing CA works, reading CA doesn't
-    // This is a protocol error of the slave
-    retval += ec_SDOwrite(slave, 0x1c12, 0x00, TRUE, sizeof(map_1c12), &map_1c12, EC_TIMEOUTSAFE);
-    retval += ec_SDOwrite(slave, 0x1c13, 0x00, TRUE, sizeof(map_1c13), &map_1c13, EC_TIMEOUTSAFE);
-
-    // bug in EL7031 old firmware, CompleteAccess for reading is not supported even if the slave says it is.
-    ec_slave[slave].CoEdetails &= ~ECT_COEDET_SDOCA;
-
-    // set some motor parameters, just as example
-    u16val = 1200; // max motor current in mA
-//    retval += ec_SDOwrite(slave, 0x8010, 0x01, FALSE, sizeof(u16val), &u16val, EC_TIMEOUTSAFE);
-    u16val = 150; // motor coil resistance in 0.01ohm
-//    retval += ec_SDOwrite(slave, 0x8010, 0x04, FALSE, sizeof(u16val), &u16val, EC_TIMEOUTSAFE);
-
-    // set other nescessary parameters as needed
-    // .....
-
-    while(EcatError) printf("%s", ec_elist2string());
-
-    printf("EL7031 slave %d set, retval = %d\n", slave, retval);
-    return 1;
 }
 
 
@@ -91,17 +67,12 @@ int DELTAsetup(uint16 slave)
    //RxPDO1
    u8val = 0x00;
    retval += ec_SDOwrite(slave,0x1600,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
-   u32val = 0x60600008;
-   retval += ec_SDOwrite(slave,0x1600,01,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
-   u32val = 0x60830020;
-   retval += ec_SDOwrite(slave,0x1600,02,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
-   u32val = 0x60840020;
-   retval += ec_SDOwrite(slave,0x1600,03,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   
    u32val = 0x60FF0020;
-   retval += ec_SDOwrite(slave,0x1600,04,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   retval += ec_SDOwrite(slave,0x1600,01,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
    u32val = 0x60400010;
-   retval += ec_SDOwrite(slave,0x1600,05,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
-   u8val = 0x05;
+   retval += ec_SDOwrite(slave,0x1600,02,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   u8val = 0x02;
    retval += ec_SDOwrite(slave,0x1600,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
    
    //TxPDO1
@@ -126,6 +97,15 @@ int DELTAsetup(uint16 slave)
    retval += ec_SDOwrite(slave,0x1c13,01,FALSE,sizeof(u16val),&u16val,EC_TIMEOUTRXM);
    u8val = 0x01;
    retval += ec_SDOwrite(slave,0x1c13,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
+
+   // set to profile velocity mode
+   u8val = 0x03;
+   retval += ec_SDOwrite(slave, 0x6060, 0x00, FALSE, sizeof(u8val), &u8val, EC_TIMEOUTRXM);
+   // set profile acceleration and deacceleration to 200
+   u32val = 200;
+   retval += ec_SDOwrite(slave, 0x6083, 0x00, FALSE, sizeof(u32val), &u32val, EC_TIMEOUTRXM);
+   retval += ec_SDOwrite(slave, 0x6084, 0x00, FALSE, sizeof(u32val), &u32val, EC_TIMEOUTRXM);
+
    
 
    while(EcatError) printf("%s", ec_elist2string());
@@ -162,45 +142,6 @@ int ec_slave_read()
 
 }
 
-int AEPsetup(uint16 slave)
-{
-    int retval;
-    uint8 u8val;
-    uint16 u16val;
-
-    retval = 0;
-
-    u8val = 0;
-    retval += ec_SDOwrite(slave, 0x1c12, 0x00, FALSE, sizeof(u8val), &u8val, EC_TIMEOUTRXM);
-    u16val = 0x1603;
-    retval += ec_SDOwrite(slave, 0x1c12, 0x01, FALSE, sizeof(u16val), &u16val, EC_TIMEOUTRXM);
-    u8val = 1;
-    retval += ec_SDOwrite(slave, 0x1c12, 0x00, FALSE, sizeof(u8val), &u8val, EC_TIMEOUTRXM);
-
-    u8val = 0;
-    retval += ec_SDOwrite(slave, 0x1c13, 0x00, FALSE, sizeof(u8val), &u8val, EC_TIMEOUTRXM);
-    u16val = 0x1a03;
-    retval += ec_SDOwrite(slave, 0x1c13, 0x01, FALSE, sizeof(u16val), &u16val, EC_TIMEOUTRXM);
-    u8val = 1;
-    retval += ec_SDOwrite(slave, 0x1c13, 0x00, FALSE, sizeof(u8val), &u8val, EC_TIMEOUTRXM);
-
-    u8val = 8;
-    retval += ec_SDOwrite(slave, 0x6060, 0x00, FALSE, sizeof(u8val), &u8val, EC_TIMEOUTRXM);
-
-    // set some motor parameters, just as example
-    u16val = 1200; // max motor current in mA
-//    retval += ec_SDOwrite(slave, 0x8010, 0x01, FALSE, sizeof(u16val), &u16val, EC_TIMEOUTSAFE);
-    u16val = 150; // motor coil resistance in 0.01ohm
-//    retval += ec_SDOwrite(slave, 0x8010, 0x04, FALSE, sizeof(u16val), &u16val, EC_TIMEOUTSAFE);
-
-    // set other nescessary parameters as needed
-    // .....
-
-    while(EcatError) printf("%s", ec_elist2string());
-
-    printf("AEP slave %d set, retval = %d\n", slave, retval);
-    return 1;
-}
 
 void simpletest(char *ifname)
 {
@@ -258,8 +199,11 @@ void simpletest(char *ifname)
 
          printf("segments : %d : %d %d %d %d\n",ec_group[0].nsegments ,ec_group[0].IOsegment[0],ec_group[0].IOsegment[1],ec_group[0].IOsegment[2],ec_group[0].IOsegment[3]);
 
-         uint16_t * control_word = (uint16_t *)ec_slave[1].outputs;
-         uint16_t * status_word = (uint16_t *)ec_slave[1].inputs;
+         struct PDO_out *slave_out;
+         slave_out = (struct PDO_out *)(ec_slave[1].outputs);
+         // slave in
+         struct PDO_in *slave_in;
+         slave_in = (struct PDO_in *)(ec_slave[1].inputs);
 
         //  printf("Request operational state for all slaves\n");
         //  expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
@@ -290,34 +234,25 @@ void simpletest(char *ifname)
             wkc_count = 0;
             inOP = TRUE;
 
-            control_word[0] = 0x0003;
+            slave_out->target_vel = 0;
             ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET); 
-            control_word[1] = 0x00c8;
+            wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
+            slave_out->controlword = 0x0006;
             ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET); 
-            control_word[2] = 0x00c8;
+            wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
+            slave_out->controlword = 0x0007;
             ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET); 
-            control_word[3] = 0x0000;
+            wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
+            slave_out->controlword = 0x000f;
             ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET); 
-            control_word[4] = 0x0006;
+            wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
+            slave_out->target_vel = 2000;
             ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET); 
-            control_word[4] = 0x0007;
-            ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET); 
-            control_word[4] = 0x000f;
-            ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET); 
-            control_word[3] = 0x07d0;
-            ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET); 
+            wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
 
             printf("profile velocity mode complete wkc count : %d\n", wkc_count);
 
-            printf("status word output ; status:%d mode:%d velocity demand:%d velocity actual:%d\n", status_word[0],status_word[1],status_word[2],status_word[3]);
+            printf("status word output ; status:%d mode:%d velocity demand:%d velocity actual:%d\n", slave_in->statusword, slave_in->mode_of_op, slave_in->vel_demand, slave_in->vel_act);
             system("pause");
          }
 
