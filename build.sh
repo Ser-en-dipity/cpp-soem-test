@@ -7,8 +7,4 @@ cmake --build .
 
 
 
-cd /d d:\n
-cd ethernet-cmake-exe\n
-cd build\n
-cd debug\n
-test.exe \Device\NPF_{A8D75083-2510-40B2-80B9-479BE2D94277}
+cd C:\Users\小透明\Desktop\cpp-soem-test\build\Debug

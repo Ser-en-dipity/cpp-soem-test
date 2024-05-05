@@ -1,6 +1,6 @@
-^D:\ETHERNET-CMAKE-EXE\CMAKELISTS.TXT
+^C:\USERS\小透明\DESKTOP\CPP-SOEM-TEST\CMAKELISTS.TXT
 setlocal
-D:\CMake\bin\cmake.exe -SD:/ethernet-cmake-exe -BD:/ethernet-cmake-exe/build --check-stamp-file D:/ethernet-cmake-exe/build/CMakeFiles/generate.stamp
+D:\CMake\bin\cmake.exe -SC:/Users/小透明/Desktop/cpp-soem-test -BC:/Users/小透明/Desktop/cpp-soem-test/build --check-stamp-file C:/Users/小透明/Desktop/cpp-soem-test/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

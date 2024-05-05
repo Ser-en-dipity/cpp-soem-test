@@ -1,6 +1,6 @@
-^D:\ETHERNET-CMAKE-EXE\BUILD\CMAKEFILES\2B3EE1735B753188B278B307242E0268\GENERATE.STAMP.RULE
+^C:\USERS\小透明\DESKTOP\CPP-SOEM-TEST\BUILD\CMAKEFILES\6CDF7E381C0522312EDCBF25F319950F\GENERATE.STAMP.RULE
 setlocal
-D:\CMake\bin\cmake.exe -SD:/ethernet-cmake-exe -BD:/ethernet-cmake-exe/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/ethernet-cmake-exe/build/SOEM.sln
+D:\CMake\bin\cmake.exe -SC:/Users/小透明/Desktop/cpp-soem-test -BC:/Users/小透明/Desktop/cpp-soem-test/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/小透明/Desktop/cpp-soem-test/build/SOEM.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

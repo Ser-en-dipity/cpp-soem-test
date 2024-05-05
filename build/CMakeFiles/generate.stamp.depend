@@ -1,4 +1,8 @@
 # CMake generation dependency list for this directory.
+C:/Users/小透明/Desktop/cpp-soem-test/CMakeLists.txt
+C:/Users/小透明/Desktop/cpp-soem-test/build/CMakeFiles/3.28.3/CMakeCCompiler.cmake
+C:/Users/小透明/Desktop/cpp-soem-test/build/CMakeFiles/3.28.3/CMakeRCCompiler.cmake
+C:/Users/小透明/Desktop/cpp-soem-test/build/CMakeFiles/3.28.3/CMakeSystem.cmake
 D:/CMake/share/cmake-3.28/Modules/CMakeCCompiler.cmake.in
 D:/CMake/share/cmake-3.28/Modules/CMakeCCompilerABI.c
 D:/CMake/share/cmake-3.28/Modules/CMakeCInformation.cmake
@@ -77,7 +81,3 @@ D:/CMake/share/cmake-3.28/Modules/Platform/Windows-MSVC-C.cmake
 D:/CMake/share/cmake-3.28/Modules/Platform/Windows-MSVC.cmake
 D:/CMake/share/cmake-3.28/Modules/Platform/Windows.cmake
 D:/CMake/share/cmake-3.28/Modules/Platform/WindowsPaths.cmake
-D:/ethernet-cmake-exe/CMakeLists.txt
-D:/ethernet-cmake-exe/build/CMakeFiles/3.28.3/CMakeCCompiler.cmake
-D:/ethernet-cmake-exe/build/CMakeFiles/3.28.3/CMakeRCCompiler.cmake
-D:/ethernet-cmake-exe/build/CMakeFiles/3.28.3/CMakeSystem.cmake
