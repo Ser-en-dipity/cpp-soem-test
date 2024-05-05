@@ -697,7 +697,7 @@ void simpletest(char *ifname)
 
          /* request OP state for all slaves */
          ec_writestate(0);
-         chk = 200;
+         chk = 10000;
          /* wait for all slaves to reach OP state */
          do
          {
@@ -714,17 +714,9 @@ void simpletest(char *ifname)
             inOP = TRUE;
 
             slave_out->target_vel = 0;
-            ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
             slave_out->controlword = 0x0006;
-            ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
             slave_out->controlword = 0x0007;
-            ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
             slave_out->controlword = 0x000f;
-            ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
             slave_out->target_vel = 2000;
             ec_send_processdata();
             wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
