@@ -35,8 +35,8 @@ boolean printMAP = FALSE;
 boolean printFMMU = FALSE;
 
 struct PDO_out {
-   uint16_t controlword;
    int32_t target_vel;
+   uint16_t controlword;
 };
 struct PDO_in {
    uint16_t statusword;
@@ -648,7 +648,7 @@ void simpletest(char *ifname)
        if ( ec_config_init(FALSE) > 0 )
        {
             printf("%d slaves found and configured.\n",ec_slavecount);
-            ec_configdc();
+            // ec_configdc();
 
             for(slc = 1; slc <= ec_slavecount; slc++)
             {
@@ -701,12 +701,10 @@ void simpletest(char *ifname)
 
          /* request OP state for all slaves */
          ec_writestate(0);
-         chk = 10000;
+         chk = 200;
          /* wait for all slaves to reach OP state */
          do
          {
-            ec_send_processdata();
-            ec_receive_processdata(EC_TIMEOUTRET);
             ec_statecheck(0, EC_STATE_OPERATIONAL, 1000);
          }
          while (chk-- && (ec_slave[0].state != EC_STATE_OPERATIONAL));
@@ -717,6 +715,21 @@ void simpletest(char *ifname)
             {
                if(wkc >= expectedWKC)
                {
+                  slave_out->target_vel = 0;
+                  ec_send_processdata();
+                  wkc += ec_receive_processdata(EC_TIMEOUTRET);
+                  slave_out->controlword = 0x0006;
+                  ec_send_processdata();
+                  wkc += ec_receive_processdata(EC_TIMEOUTRET);
+                  slave_out->controlword = 0x0007;
+                  ec_send_processdata();
+                  wkc += ec_receive_processdata(EC_TIMEOUTRET);
+                  slave_out->controlword = 0x000f;
+                  ec_send_processdata();
+                  wkc += ec_receive_processdata(EC_TIMEOUTRET);
+                  slave_out->target_vel = 0x07d0;
+                  ec_send_processdata();
+                  wkc += ec_receive_processdata(EC_TIMEOUTRET);
                   printf("Processdata cycle %4d, WKC %d , O:", rtcnt, wkc);
 
                   for(j = 0 ; j < oloop; j++)
