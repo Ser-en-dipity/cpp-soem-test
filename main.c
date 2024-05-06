@@ -30,6 +30,9 @@ ec_ODlistt ODlist;
 ec_OElistt OElist;
 char usdo[128];
 char hstr[1024];
+boolean printSDO = FALSE;
+boolean printMAP = FALSE;
+boolean printFMMU = FALSE;
 
 struct PDO_out {
    uint16_t controlword;
@@ -584,7 +587,8 @@ int DELTAsetup(uint16 slave)
    retval += ec_SDOwrite(slave, 0x6083, 0x00, FALSE, sizeof(u32val), &u32val, EC_TIMEOUTRXM);
    retval += ec_SDOwrite(slave, 0x6084, 0x00, FALSE, sizeof(u32val), &u32val, EC_TIMEOUTRXM);
 
-   ec_dcsync0(slave, TRUE, 5 * 1000, 0);
+   // free run
+   // ec_dcsync0(slave, TRUE, 5 * 1000, 0);
 
 
    while(EcatError) printf("%s", ec_elist2string());
@@ -684,16 +688,16 @@ void simpletest(char *ifname)
          struct PDO_in *slave_in;
          slave_in = (struct PDO_in *)(ec_slave[1].inputs);
 
-        //  printf("Request operational state for all slaves\n");
-        //  expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
-        //  printf("Calculated workcounter %d\n", expectedWKC);
+         printf("Request operational state for all slaves\n");
+         expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
+         printf("Calculated workcounter %d\n", expectedWKC);
          ec_slave[0].state = EC_STATE_OPERATIONAL;
-        //  /* send one valid process data to make outputs in slaves happy*/
+         /* send one valid process data to make outputs in slaves happy*/
          ec_send_processdata();
          ec_receive_processdata(EC_TIMEOUTRET);
 
          /* start RT thread as periodic MM timer */
-        //  mmResult = timeSetEvent(1, 0, RTthread, 0, TIME_PERIODIC);
+         mmResult = timeSetEvent(1, 0, RTthread, 0, TIME_PERIODIC);
 
          /* request OP state for all slaves */
          ec_writestate(0);
@@ -709,139 +713,140 @@ void simpletest(char *ifname)
          if (ec_slave[0].state == EC_STATE_OPERATIONAL )
          {
             printf("Operational state reached for all slaves.\n");
-
-            wkc_count = 0;
-            inOP = TRUE;
-
-            slave_out->target_vel = 0;
-            slave_out->controlword = 0x0006;
-            slave_out->controlword = 0x0007;
-            slave_out->controlword = 0x000f;
-            slave_out->target_vel = 2000;
-            ec_send_processdata();
-            wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
-
-            printf("profile velocity mode complete wkc count : %d\n", wkc_count);
-
-            printf("status word output ; status:%d mode:%d velocity demand:%d velocity actual:%d\n", slave_in->statusword, slave_in->mode_of_op, slave_in->vel_demand, slave_in->vel_act);
-            system("pause");
-         }
-
-         ec_readstate();
-         for( cnt = 1 ; cnt <= ec_slavecount ; cnt++)
-         {
-            printf("\nSlave:%d\n Name:%s\n Output size: %dbits\n Input size: %dbits\n State: %d\n Delay: %d[ns]\n Has DC: %d\n",
-                  cnt, ec_slave[cnt].name, ec_slave[cnt].Obits, ec_slave[cnt].Ibits,
-                  ec_slave[cnt].state, ec_slave[cnt].pdelay, ec_slave[cnt].hasdc);
-            if (ec_slave[cnt].hasdc) printf(" DCParentport:%d\n", ec_slave[cnt].parentport);
-            printf(" Activeports:%d.%d.%d.%d\n", (ec_slave[cnt].activeports & 0x01) > 0 ,
-                                         (ec_slave[cnt].activeports & 0x02) > 0 ,
-                                         (ec_slave[cnt].activeports & 0x04) > 0 ,
-                                         (ec_slave[cnt].activeports & 0x08) > 0 );
-            printf(" Configured address: %4.4x\n", ec_slave[cnt].configadr);
-            printf(" Man: %8.8x ID: %8.8x Rev: %8.8x\n", (int)ec_slave[cnt].eep_man, (int)ec_slave[cnt].eep_id, (int)ec_slave[cnt].eep_rev);
-            for(nSM = 0 ; nSM < EC_MAXSM ; nSM++)
+            for(i = 1; i <= 500; i++)
             {
-               if(ec_slave[cnt].SM[nSM].StartAddr > 0)
-                  printf(" SM%1d A:%4.4x L:%4d F:%8.8x Type:%d\n",nSM, ec_slave[cnt].SM[nSM].StartAddr, ec_slave[cnt].SM[nSM].SMlength,
-                         (int)ec_slave[cnt].SM[nSM].SMflags, ec_slave[cnt].SMtype[nSM]);
-            }
-            for(j = 0 ; j < ec_slave[cnt].FMMUunused ; j++)
-            {
-               printf(" FMMU%1d Ls:%8.8x Ll:%4d Lsb:%d Leb:%d Ps:%4.4x Psb:%d Ty:%2.2x Act:%2.2x\n", j,
-                       (int)ec_slave[cnt].FMMU[j].LogStart, ec_slave[cnt].FMMU[j].LogLength, ec_slave[cnt].FMMU[j].LogStartbit,
-                       ec_slave[cnt].FMMU[j].LogEndbit, ec_slave[cnt].FMMU[j].PhysStart, ec_slave[cnt].FMMU[j].PhysStartBit,
-                       ec_slave[cnt].FMMU[j].FMMUtype, ec_slave[cnt].FMMU[j].FMMUactive);
-            }
-            printf(" FMMUfunc 0:%d 1:%d 2:%d 3:%d\n",
-                     ec_slave[cnt].FMMU0func, ec_slave[cnt].FMMU1func, ec_slave[cnt].FMMU2func, ec_slave[cnt].FMMU3func);
-            printf(" MBX length wr: %d rd: %d MBX protocols : %2.2x\n", ec_slave[cnt].mbx_l, ec_slave[cnt].mbx_rl, ec_slave[cnt].mbx_proto);
-            ssigen = ec_siifind(cnt, ECT_SII_GENERAL);
-            /* SII general section */
-            if (ssigen)
-            {
-               ec_slave[cnt].CoEdetails = ec_siigetbyte(cnt, ssigen + 0x07);
-               ec_slave[cnt].FoEdetails = ec_siigetbyte(cnt, ssigen + 0x08);
-               ec_slave[cnt].EoEdetails = ec_siigetbyte(cnt, ssigen + 0x09);
-               ec_slave[cnt].SoEdetails = ec_siigetbyte(cnt, ssigen + 0x0a);
-               if((ec_siigetbyte(cnt, ssigen + 0x0d) & 0x02) > 0)
+               if(wkc >= expectedWKC)
                {
-                  ec_slave[cnt].blockLRW = 1;
-                  ec_slave[0].blockLRW++;
+                  printf("Processdata cycle %4d, WKC %d , O:", rtcnt, wkc);
+
+                  for(j = 0 ; j < oloop; j++)
+                  {
+                        printf(" %2.2x", *(ec_slave[0].outputs + j));
+                  }
+
+                  printf(" I:");
+                  for(j = 0 ; j < iloop; j++)
+                  {
+                        printf(" %2.2x", *(ec_slave[0].inputs + j));
+                  }
+                  printf(" T:%lld\r",ec_DCtime);
+                  needlf = TRUE;
                }
-               ec_slave[cnt].Ebuscurrent = ec_siigetbyte(cnt, ssigen + 0x0e);
-               ec_slave[cnt].Ebuscurrent += ec_siigetbyte(cnt, ssigen + 0x0f) << 8;
-               ec_slave[0].Ebuscurrent += ec_slave[cnt].Ebuscurrent;
+               osal_usleep(50000);
+
             }
-            printf(" CoE details: %2.2x FoE details: %2.2x EoE details: %2.2x SoE details: %2.2x\n",
-                    ec_slave[cnt].CoEdetails, ec_slave[cnt].FoEdetails, ec_slave[cnt].EoEdetails, ec_slave[cnt].SoEdetails);
-            printf(" Ebus current: %d[mA]\n only LRD/LWR:%d\n",
-                    ec_slave[cnt].Ebuscurrent, ec_slave[cnt].blockLRW);
-            if ((ec_slave[cnt].mbx_proto & ECT_MBXPROT_COE))
-               si_sdo(cnt);
-            if (ec_slave[cnt].mbx_proto & ECT_MBXPROT_COE)
-               si_map_sdo(cnt);
-            else
-               si_map_sii(cnt);
+            inOP = FALSE;
+
+            // wkc_count = 0;
+            // inOP = TRUE;
+
+            // slave_out->target_vel = 0;
+            // slave_out->controlword = 0x0006;
+            // slave_out->controlword = 0x0007;
+            // slave_out->controlword = 0x000f;
+            // slave_out->target_vel = 2000;
+            // ec_send_processdata();
+            // wkc_count += ec_receive_processdata(EC_TIMEOUTRET);
+
+            // printf("profile velocity mode complete wkc count : %d\n", wkc_count);
+
+            // printf("status word output ; status:%d mode:%d velocity demand:%d velocity actual:%d\n", slave_in->statusword, slave_in->mode_of_op, slave_in->vel_demand, slave_in->vel_act);
+            // system("pause");
+         }
+         else
+         {
+            printf("Not all slaves reached operational state.\n");
+            ec_readstate();
+            for(i = 1; i<=ec_slavecount ; i++)
+            {
+               if(ec_slave[i].state != EC_STATE_OPERATIONAL)
+               {
+                  printf("Slave %d State=0x%2.2x StatusCode=0x%4.4x : %s\n",
+                        i, ec_slave[i].state, ec_slave[i].ALstatuscode, ec_ALstatuscode2string(ec_slave[i].ALstatuscode));
+               }
+            }
          }
 
-
-
-        //     /* cyclic loop, reads data from RT thread */
-        //     for(i = 1; i <= 500; i++)
-        //     {
-        //             if(wkc >= expectedWKC)
-        //             {
-        //                 printf("Processdata cycle %4d, WKC %d , O:", rtcnt, wkc);
-
-        //                 for(j = 0 ; j < oloop; j++)
-        //                 {
-        //                     printf(" %2.2x", *(ec_slave[0].outputs + j));
-        //                 }
-
-        //                 printf(" I:");
-        //                 for(j = 0 ; j < iloop; j++)
-        //                 {
-        //                     printf(" %2.2x", *(ec_slave[0].inputs + j));
-        //                 }
-        //                 printf(" T:%lld\r",ec_DCtime);
-        //                 needlf = TRUE;
-        //             }
-        //             osal_usleep(50000);
-
-        //     }
-        //     inOP = FALSE;
-        //  }
-        //  else
-        //  {
-        //         printf("Not all slaves reached operational state.\n");
-        //         ec_readstate();
-        //         for(i = 1; i<=ec_slavecount ; i++)
-        //         {
-        //             if(ec_slave[i].state != EC_STATE_OPERATIONAL)
-        //             {
-        //                 printf("Slave %d State=0x%2.2x StatusCode=0x%4.4x : %s\n",
-        //                     i, ec_slave[i].state, ec_slave[i].ALstatuscode, ec_ALstatuscode2string(ec_slave[i].ALstatuscode));
-        //             }
-        //         }
-        //  }
+         if (printFMMU)
+         {
+            ec_readstate();
+            for( cnt = 1 ; cnt <= ec_slavecount ; cnt++)
+            {
+               printf("\nSlave:%d\n Name:%s\n Output size: %dbits\n Input size: %dbits\n State: %d\n Delay: %d[ns]\n Has DC: %d\n",
+                     cnt, ec_slave[cnt].name, ec_slave[cnt].Obits, ec_slave[cnt].Ibits,
+                     ec_slave[cnt].state, ec_slave[cnt].pdelay, ec_slave[cnt].hasdc);
+               if (ec_slave[cnt].hasdc) printf(" DCParentport:%d\n", ec_slave[cnt].parentport);
+               printf(" Activeports:%d.%d.%d.%d\n", (ec_slave[cnt].activeports & 0x01) > 0 ,
+                                          (ec_slave[cnt].activeports & 0x02) > 0 ,
+                                          (ec_slave[cnt].activeports & 0x04) > 0 ,
+                                          (ec_slave[cnt].activeports & 0x08) > 0 );
+               printf(" Configured address: %4.4x\n", ec_slave[cnt].configadr);
+               printf(" Man: %8.8x ID: %8.8x Rev: %8.8x\n", (int)ec_slave[cnt].eep_man, (int)ec_slave[cnt].eep_id, (int)ec_slave[cnt].eep_rev);
+               for(nSM = 0 ; nSM < EC_MAXSM ; nSM++)
+               {
+                  if(ec_slave[cnt].SM[nSM].StartAddr > 0)
+                     printf(" SM%1d A:%4.4x L:%4d F:%8.8x Type:%d\n",nSM, ec_slave[cnt].SM[nSM].StartAddr, ec_slave[cnt].SM[nSM].SMlength,
+                           (int)ec_slave[cnt].SM[nSM].SMflags, ec_slave[cnt].SMtype[nSM]);
+               }
+               for(j = 0 ; j < ec_slave[cnt].FMMUunused ; j++)
+               {
+                  printf(" FMMU%1d Ls:%8.8x Ll:%4d Lsb:%d Leb:%d Ps:%4.4x Psb:%d Ty:%2.2x Act:%2.2x\n", j,
+                        (int)ec_slave[cnt].FMMU[j].LogStart, ec_slave[cnt].FMMU[j].LogLength, ec_slave[cnt].FMMU[j].LogStartbit,
+                        ec_slave[cnt].FMMU[j].LogEndbit, ec_slave[cnt].FMMU[j].PhysStart, ec_slave[cnt].FMMU[j].PhysStartBit,
+                        ec_slave[cnt].FMMU[j].FMMUtype, ec_slave[cnt].FMMU[j].FMMUactive);
+               }
+               printf(" FMMUfunc 0:%d 1:%d 2:%d 3:%d\n",
+                        ec_slave[cnt].FMMU0func, ec_slave[cnt].FMMU1func, ec_slave[cnt].FMMU2func, ec_slave[cnt].FMMU3func);
+               printf(" MBX length wr: %d rd: %d MBX protocols : %2.2x\n", ec_slave[cnt].mbx_l, ec_slave[cnt].mbx_rl, ec_slave[cnt].mbx_proto);
+               ssigen = ec_siifind(cnt, ECT_SII_GENERAL);
+               /* SII general section */
+               if (ssigen)
+               {
+                  ec_slave[cnt].CoEdetails = ec_siigetbyte(cnt, ssigen + 0x07);
+                  ec_slave[cnt].FoEdetails = ec_siigetbyte(cnt, ssigen + 0x08);
+                  ec_slave[cnt].EoEdetails = ec_siigetbyte(cnt, ssigen + 0x09);
+                  ec_slave[cnt].SoEdetails = ec_siigetbyte(cnt, ssigen + 0x0a);
+                  if((ec_siigetbyte(cnt, ssigen + 0x0d) & 0x02) > 0)
+                  {
+                     ec_slave[cnt].blockLRW = 1;
+                     ec_slave[0].blockLRW++;
+                  }
+                  ec_slave[cnt].Ebuscurrent = ec_siigetbyte(cnt, ssigen + 0x0e);
+                  ec_slave[cnt].Ebuscurrent += ec_siigetbyte(cnt, ssigen + 0x0f) << 8;
+                  ec_slave[0].Ebuscurrent += ec_slave[cnt].Ebuscurrent;
+               }
+               printf(" CoE details: %2.2x FoE details: %2.2x EoE details: %2.2x SoE details: %2.2x\n",
+                     ec_slave[cnt].CoEdetails, ec_slave[cnt].FoEdetails, ec_slave[cnt].EoEdetails, ec_slave[cnt].SoEdetails);
+               printf(" Ebus current: %d[mA]\n only LRD/LWR:%d\n",
+                     ec_slave[cnt].Ebuscurrent, ec_slave[cnt].blockLRW);
+               if ((ec_slave[cnt].mbx_proto & ECT_MBXPROT_COE) && printSDO)
+                  si_sdo(cnt);
+               if (printMAP)
+               {
+                  if (ec_slave[cnt].mbx_proto & ECT_MBXPROT_COE)
+                     si_map_sdo(cnt);
+                  else
+                     si_map_sii(cnt);
+               }
+            }
+         }
 
          /* stop RT thread */
-        //  timeKillEvent(mmResult);
+         timeKillEvent(mmResult);
          // ec_slave_read(); 
 
          printf("\nRequest init state for all slaves\n");
          ec_slave[0].state = EC_STATE_INIT;
          /* request INIT state for all slaves */
          ec_writestate(0);
-        }
-        else
-        {
-            printf("No slaves found!\n");
-        }
-        printf("End simple test, close socket\n");
-        /* stop SOEM, close socket */
-        ec_close();
+         }
+         else
+         {
+               printf("No slaves found!\n");
+         }
+         printf("End simple test, close socket\n");
+         /* stop SOEM, close socket */
+         ec_close();
     }
     else
     {
@@ -937,6 +942,9 @@ int main(int argc, char *argv[])
 
    if (argc > 1)
    {
+      if ((argc > 2) && (strncmp(argv[2], "-sdo", sizeof("-sdo")) == 0)) printSDO = TRUE;
+      if ((argc > 2) && (strncmp(argv[2], "-map", sizeof("-map")) == 0)) printMAP = TRUE;
+      if ((argc > 2) && (strncmp(argv[2], "-fmmu", sizeof("-fmmu")) == 0)) printFMMU = TRUE;
       /* create thread to handle slave error handling in OP */
       osal_thread_create(&thread1, 128000, &ecatcheck, NULL);
       strcpy(ifbuf, argv[1]);
