@@ -26,6 +26,79 @@ boolean inOP;
 uint8 currentgroup = 0;
 boolean forceByteAlignment = FALSE;
 
+struct PDO_out {
+   int32_t target_vel;
+   uint16_t controlword;
+};
+struct PDO_in {
+   uint16_t statusword;
+   int8_t mode_of_op;
+   int32_t vel_demand;
+   int32_t vel_act;
+};
+
+int DELTAsetup(uint16 slave)
+{
+   int retval;
+   uint8 u8val;
+   uint16 u16val;
+   uint32 u32val;
+
+   retval = 0;
+
+   u8val = 0x00;
+   retval += ec_SDOwrite(slave,0x1c12,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
+   u8val = 0x00;
+   retval += ec_SDOwrite(slave,0x1c13,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
+   
+   //RxPDO1
+   u8val = 0x00;
+   retval += ec_SDOwrite(slave,0x1600,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
+   
+   u32val = 0x60FF0020;
+   retval += ec_SDOwrite(slave,0x1600,01,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   u32val = 0x60400010;
+   retval += ec_SDOwrite(slave,0x1600,02,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   u8val = 0x02;
+   retval += ec_SDOwrite(slave,0x1600,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
+   
+   //TxPDO1
+   u8val = 0x00;
+   retval += ec_SDOwrite(slave,0x1a00,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
+   u32val = 0x60410010;
+   retval += ec_SDOwrite(slave,0x1a00,01,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   u32val = 0x60610008;
+   retval += ec_SDOwrite(slave,0x1a00,02,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   u32val = 0x606B0020;
+   retval += ec_SDOwrite(slave,0x1a00,03,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   u32val = 0x606C0020;
+   retval += ec_SDOwrite(slave,0x1a00,04,FALSE,sizeof(u32val),&u32val,EC_TIMEOUTRXM);
+   u8val = 0x04;
+   retval += ec_SDOwrite(slave,0x1a00,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
+
+   u16val = 0x1600;
+   retval += ec_SDOwrite(slave,0x1c12,01,FALSE,sizeof(u16val),&u16val,EC_TIMEOUTRXM);
+   u8val = 0x01;
+   retval += ec_SDOwrite(slave,0x1c12,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
+   u16val = 0x1a00;
+   retval += ec_SDOwrite(slave,0x1c13,01,FALSE,sizeof(u16val),&u16val,EC_TIMEOUTRXM);
+   u8val = 0x01;
+   retval += ec_SDOwrite(slave,0x1c13,00,FALSE,sizeof(u8val),&u8val,EC_TIMEOUTRXM);
+
+   // set to profile velocity mode
+   u8val = 0x03;
+   retval += ec_SDOwrite(slave, 0x6060, 0x00, FALSE, sizeof(u8val), &u8val, EC_TIMEOUTRXM);
+   // set profile acceleration and deacceleration to 200
+   u32val = 200;
+   retval += ec_SDOwrite(slave, 0x6083, 0x00, FALSE, sizeof(u32val), &u32val, EC_TIMEOUTRXM);
+   retval += ec_SDOwrite(slave, 0x6084, 0x00, FALSE, sizeof(u32val), &u32val, EC_TIMEOUTRXM);
+
+   while(EcatError) printf("%s", ec_elist2string());
+
+   printf("delta slave %d set, retval = %d\n", slave, retval);
+   return 1;
+}
+
 void simpletest(char *ifname)
 {
     int i, j, oloop, iloop, chk;
@@ -45,6 +118,13 @@ void simpletest(char *ifname)
       {
          printf("%d slaves found and configured.\n",ec_slavecount);
 
+         for(slc = 1; slc <= ec_slavecount; slc++)
+         {
+            // link slave specific setup to preop->safeop hook
+            printf("ec slave name :%s \n",ec_slave[slc].name);
+            ec_slave[slc].PO2SOconfig = &DELTAsetup;
+         }
+
          if (forceByteAlignment)
          {
             ec_config_map_aligned(&IOmap);
@@ -54,7 +134,7 @@ void simpletest(char *ifname)
             ec_config_map(&IOmap);
          }
 
-         ec_configdc();
+         // ec_configdc();
 
          printf("Slaves mapped, state to SAFE_OP.\n");
          /* wait for all slaves to reach SAFE_OP state */
@@ -69,6 +149,12 @@ void simpletest(char *ifname)
 
          printf("segments : %d : %d %d %d %d\n",ec_group[0].nsegments ,ec_group[0].IOsegment[0],ec_group[0].IOsegment[1],ec_group[0].IOsegment[2],ec_group[0].IOsegment[3]);
 
+         struct PDO_out *slave_out;
+         slave_out = (struct PDO_out *)(ec_slave[1].outputs);
+         // slave in
+         struct PDO_in *slave_in;
+         slave_in = (struct PDO_in *)(ec_slave[1].inputs);
+
          printf("Request operational state for all slaves\n");
          expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
          printf("Calculated workcounter %d\n", expectedWKC);
@@ -76,6 +162,10 @@ void simpletest(char *ifname)
          /* send one valid process data to make outputs in slaves happy*/
          ec_send_processdata();
          ec_receive_processdata(EC_TIMEOUTRET);
+
+         /* start RT thread as periodic MM timer */
+         mmResult = timeSetEvent(1, 0, RTthread, 0, TIME_PERIODIC);
+
          /* request OP state for all slaves */
          ec_writestate(0);
          chk = 200;
@@ -84,40 +174,57 @@ void simpletest(char *ifname)
          {
             ec_send_processdata();
             ec_receive_processdata(EC_TIMEOUTRET);
-            ec_statecheck(0, EC_STATE_OPERATIONAL, 50000);
+            ec_statecheck(0, EC_STATE_OPERATIONAL, 1000);
          }
          while (chk-- && (ec_slave[0].state != EC_STATE_OPERATIONAL));
          if (ec_slave[0].state == EC_STATE_OPERATIONAL )
          {
             printf("Operational state reached for all slaves.\n");
             inOP = TRUE;
+
+            slave_out->target_vel = 0;
+            ec_send_processdata();
+            wkc += ec_receive_processdata(EC_TIMEOUTRET); osal_usleep(1000);
+            // slave_out->controlword = 0x0006;
+            // ec_send_processdata();
+            // wkc += ec_receive_processdata(EC_TIMEOUTRET); osal_usleep(1000);
+            // slave_out->controlword = 0x0007;
+            // ec_send_processdata();
+            // wkc += ec_receive_processdata(EC_TIMEOUTRET); osal_usleep(1000);
+            // slave_out->controlword = 0x000f;
+            // ec_send_processdata();
+            // wkc += ec_receive_processdata(EC_TIMEOUTRET); osal_usleep(1000);
+            slave_out->target_vel = 0x07d0;
+            ec_send_processdata();
+            wkc += ec_receive_processdata(EC_TIMEOUTRET); osal_usleep(1000);
+
                 /* cyclic loop */
-            for(i = 1; i <= 10000; i++)
+            for(i = 1; i <= 500; i++)
             {
                ec_send_processdata();
                wkc = ec_receive_processdata(EC_TIMEOUTRET);
 
-                    if(wkc >= expectedWKC)
-                    {
-                        printf("Processdata cycle %4d, WKC %d , O:", i, wkc);
+               if(wkc >= expectedWKC)
+               {
+                  printf("Processdata cycle %4d, WKC %d , O:", i, wkc);
 
-                        for(j = 0 ; j < oloop; j++)
-                        {
-                            printf(" %2.2x", *(ec_slave[0].outputs + j));
-                        }
+                  for(j = 0 ; j < oloop; j++)
+                  {
+                        printf(" %2.2x", *(ec_slave[0].outputs + j));
+                  }
 
-                        printf(" I:");
-                        for(j = 0 ; j < iloop; j++)
-                        {
-                            printf(" %2.2x", *(ec_slave[0].inputs + j));
-                        }
-                        printf(" T:%"PRId64"\r",ec_DCtime);
-                        needlf = TRUE;
-                    }
-                    osal_usleep(5000);
+                  printf(" I:");
+                  for(j = 0 ; j < iloop; j++)
+                  {
+                        printf(" %2.2x", *(ec_slave[0].inputs + j));
+                  }
+                  printf(" T:%"PRId64"\r",ec_DCtime);
+                  needlf = TRUE;
+               }
+               osal_usleep(5000);
 
-                }
-                inOP = FALSE;
+               }
+               inOP = FALSE;
             }
             else
             {
@@ -133,6 +240,10 @@ void simpletest(char *ifname)
                 }
             }
             printf("\nRequest init state for all slaves\n");
+
+            /* stop RT thread */
+            timeKillEvent(mmResult);
+
             ec_slave[0].state = EC_STATE_INIT;
             /* request INIT state for all slaves */
             ec_writestate(0);

@@ -711,25 +711,28 @@ void simpletest(char *ifname)
          if (ec_slave[0].state == EC_STATE_OPERATIONAL )
          {
             printf("Operational state reached for all slaves.\n");
+
+            slave_out->target_vel = 0;
+            ec_send_processdata();
+            wkc += ec_receive_processdata(EC_TIMEOUTRET); osal_usleep(1000);
+            slave_out->controlword = 0x0006;
+            ec_send_processdata();
+            wkc += ec_receive_processdata(EC_TIMEOUTRET); osal_usleep(1000);
+            slave_out->controlword = 0x0007;
+            ec_send_processdata();
+            wkc += ec_receive_processdata(EC_TIMEOUTRET); osal_usleep(1000);
+            slave_out->controlword = 0x000f;
+            ec_send_processdata();
+            wkc += ec_receive_processdata(EC_TIMEOUTRET); osal_usleep(1000);
+            slave_out->target_vel = 0x07d0;
+            ec_send_processdata();
+            wkc += ec_receive_processdata(EC_TIMEOUTRET); osal_usleep(1000);
+
             for(i = 1; i <= 500; i++)
             {
                if(wkc >= expectedWKC)
                {
-                  slave_out->target_vel = 0;
-                  ec_send_processdata();
-                  wkc += ec_receive_processdata(EC_TIMEOUTRET);
-                  slave_out->controlword = 0x0006;
-                  ec_send_processdata();
-                  wkc += ec_receive_processdata(EC_TIMEOUTRET);
-                  slave_out->controlword = 0x0007;
-                  ec_send_processdata();
-                  wkc += ec_receive_processdata(EC_TIMEOUTRET);
-                  slave_out->controlword = 0x000f;
-                  ec_send_processdata();
-                  wkc += ec_receive_processdata(EC_TIMEOUTRET);
-                  slave_out->target_vel = 0x07d0;
-                  ec_send_processdata();
-                  wkc += ec_receive_processdata(EC_TIMEOUTRET);
+                  
                   printf("Processdata cycle %4d, WKC %d , O:", rtcnt, wkc);
 
                   for(j = 0 ; j < oloop; j++)
