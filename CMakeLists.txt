@@ -1,63 +1,41 @@
-cmake_minimum_required(VERSION 3.9)
-project(SOEM
-    DESCRIPTION "Simple Open EtherCAT Master"
-    VERSION 1.4.0
-    LANGUAGES C)
+cmake_minimum_required(VERSION 3.8)
 
-if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  # Default to installing in SOEM source directory
-  set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_LIST_DIR}/install)
-endif()
+project(SOEM C CXX)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-if(WIN32)
-  set(OS "win32")
-  include_directories(oshw/win32/wpcap/Include)
-  link_directories(${CMAKE_CURRENT_LIST_DIR}/oshw/win32/wpcap/Lib/x64)
-  
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /D _CRT_SECURE_NO_WARNINGS")
-  set(OS_LIBS wpcap.lib Packet.lib Ws2_32.lib Winmm.lib)
-else()
-  set(OS "linux")
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror")
-  set(OS_LIBS pthread rt)
-endif()
-
-message(STATUS "OS is ${OS}")
-
-file(GLOB SOEM_SOURCES soem/*.c)
-file(GLOB OSAL_SOURCES osal/${OS}/*.c)
-file(GLOB OSHW_SOURCES oshw/${OS}/*.c)
-
-set(SOURCE_CPP_FILES
-  ${SOEM_SOURCES}
-  ${OSAL_SOURCES}
-  ${OSHW_SOURCES}
+include(ExternalProject)
+ExternalProject_Add(soem_origin
+  PREFIX soem
+  GIT_REPOSITORY  https://github.com/OpenEtherCATsociety/SOEM.git
+  GIT_TAG v1.4.0
+  CMAKE_ARGS
+   -DBUILD_TESTS=OFF
+   -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/soem_install
+  INSTALL_DIR "${CMAKE_CURRENT_BINARY_DIR}/soem_install"
 )
 
-add_library(soem STATIC
-  ${SOURCE_CPP_FILES})
+install (
+  DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/soem_install/
+  DESTINATION ${CMAKE_INSTALL_PREFIX}
+)
 
-target_link_libraries(soem ${OS_LIBS})
-
-target_include_directories(soem PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/soem>
-  $<INSTALL_INTERFACE:include/soem>)
-
-target_include_directories(soem PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/osal>
-  $<INSTALL_INTERFACE:include/soem>)
-
-target_include_directories(soem PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/osal/${OS}>
-  $<INSTALL_INTERFACE:include/soem>)
-
-target_include_directories(soem
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/oshw/${OS}>
-  $<INSTALL_INTERFACE:include/soem>
-  )
-
-if(WIN32) 
-  add_subdirectory(test/win32)
-else()
-  add_subdirectory(test/linux)
+include_directories(${CMAKE_BINARY_DIR}/soem_install/include/soem)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+if(WIN32)
+  include_directories(${CMAKE_BINARY_DIR}/soem/src/soem_origin/oshw/win32/wpcap/Include)
+  if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    link_directories(${CMAKE_BINARY_DIR}/soem/src/soem_origin/oshw/win32/wpcap/Lib/x64)
+  endif()
 endif()
+
+link_directories(${CMAKE_BINARY_DIR}/soem_install/lib)
+add_executable(soem_test "server.c" "simple_test.c")
+
+target_link_libraries(soem_test soem)
+if(WIN32)
+  target_link_libraries(soem_test ws2_32.lib Packet.lib wpcap.lib Winmm.lib)
+else()
+  target_link_libraries(soem_test pthread rt)
+endif()
+  
+add_dependencies(soem_test soem_origin)

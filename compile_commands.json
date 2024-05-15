@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/pan/king/cpp-soem-test/build",
+  "command": "/usr/bin/c++  -I/home/pan/king/cpp-soem-test/build/soem_install/include/soem -I/home/pan/king/cpp-soem-test  -o CMakeFiles/soem_test.dir/server.cc.o -c /home/pan/king/cpp-soem-test/server.cc",
+  "file": "/home/pan/king/cpp-soem-test/server.cc"
+},
+{
+  "directory": "/home/pan/king/cpp-soem-test/build",
+  "command": "/usr/bin/cc  -I/home/pan/king/cpp-soem-test/build/soem_install/include/soem -I/home/pan/king/cpp-soem-test  -o CMakeFiles/soem_test.dir/simple_test.c.o -c /home/pan/king/cpp-soem-test/simple_test.c",
+  "file": "/home/pan/king/cpp-soem-test/simple_test.c"
+}
+]
