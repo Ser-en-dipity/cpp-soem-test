@@ -15,7 +15,10 @@
                 "MIMode": "gdb",
                 "cwd": "${fileDirname}",
                 "targetArchitecture": "x64",
-                "miDebuggerPath": "/usr/bin/gdb"
+                "miDebuggerPath": "/usr/bin/gdb",
+                "args": [
+                    "enp5s0"
+                ],
             },
         }
     ]
